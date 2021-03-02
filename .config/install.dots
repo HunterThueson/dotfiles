@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Installation script for personal dotfiles.
+# Run this after cloning from github repository to set up $HOME to personal preference.
+
+export $CONFIG=$HOME/.config
+
+# Softlink bash files
+ln -s $CONFIG/bash/bashrc $HOME/.bashrc
+ln -s $CONFIG/bash/aliases $HOME/.bash_aliases
+ln -s $CONFIG/bash/profile $HOME/.bash_profile
+ln -s $CONFIG/colors/dir_colors $HOME/.dir_colors
+
+# Install programs
+sudo pacman -S pcmanfm # file manager
+sudo pacman -S tumbler # D-Bus service for thumbnails
+sudo pacman -S ffmpegthumbnailer
+
+# TODO: what if directories already exist?
+# TODO: tell other programs (like KDE or dolphin) to put documents in ~/doc, etc.
+# TODO: allow user to configure directory structure based on a separate config file

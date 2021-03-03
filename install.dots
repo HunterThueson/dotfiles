@@ -6,10 +6,10 @@
 export $CONFIG=$HOME/.config
 
 # Softlink bash files
-ln -s $CONFIG/bash/bashrc $HOME/.bashrc
-ln -s $CONFIG/bash/aliases $HOME/.bash_aliases
-ln -s $CONFIG/bash/profile $HOME/.bash_profile
-ln -s $CONFIG/colors/dir_colors $HOME/.dir_colors
+ln -s $CONFIG/.bashrc $HOME/.bashrc
+ln -s $CONFIG/.bash_aliases $HOME/.bash_aliases
+ln -s $CONFIG/.bash_profile $HOME/.bash_profile
+ln -s $CONFIG/.dir_colors $HOME/.dir_colors
 
 # Install programs
 sudo pacman -S pcmanfm # file manager

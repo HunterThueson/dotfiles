@@ -1,37 +1,34 @@
--- At the moment, this is pretty much just a copy of the default awesomewm config with MINOR edits
--- Hopefully that will change when I finally get around to configuring awesome
+-- https://github.com/HunterThueson/dotfiles/.config/awesome/rc.lua
+
+--------------------
+-- Initialization --
+--------------------
 
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- Standard awesome library
-local gears = require("gears")
-local awful = require("awful")
-require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
--- Theme handling library
-local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
+local gears = require("gears")							-- Standard AwesomeWM libraries
+local awful = require("awful")require("awful.autofocus")
+local wibox = require("wibox") 							-- widgets and layouts
+local beautiful = require("beautiful") 						-- theme handling
+local naughty = require("naughty") 						-- notifications
 local menubar = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
+local hotkeys_popup = require("awful.hotkeys_popup")				-- hotkey help widget
+                      require("awful.hotkeys_popup.keys")			-- hotkeys for vim and other apps
 
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+--------------------
+-- Error Handling --
+--------------------
 
--- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
+-- Handle startup errors --
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors })
 end
 
--- Handle runtime errors after startup
+-- Handle runtime errors (after startup) --
 do
     local in_error = false
     awesome.connect_signal("debug::error", function (err)
@@ -45,27 +42,24 @@ do
         in_error = false
     end)
 end
--- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
-beautiful.init('~/.config/awesome/default/theme.lua')
+--------------------------
+-- Variable Definitions --
+--------------------------
 
--- This is used later as the default terminal and editor to run.
+beautiful.init('~/.config/awesome/default/theme.lua') 				-- set theme
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 firefox = "firefox"
 reboot = "reboot"
 shutdown = "shutdown now"
+modkey = "Mod4"									-- control WM with Meta/Super
 
--- Window controls use Super/Meta/"Windows" key
-modkey = "Mod4"
-
--- Table of layouts to cover with awful.layout.inc, order matters.
+-- Table of layouts to cover with awful.layout.inc, order matters --
 awful.layout.layouts = {
     awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.floating,
+    --awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -77,21 +71,22 @@ awful.layout.layouts = {
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
+    --awful.layout.suit.corner.ne,
+    --awful.layout.suit.corner.sw,
+    --awful.layout.suit.corner.se,
 }
--- }}}
 
--- {{{ Menu
--- Create a launcher widget and a main menu
+-------------
+-- Menu(s) --
+-------------
+-- "Awesome" submenu --
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart }
 }
-
+-- Main menu containing awesome submenu --
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "firefox", firefox },
                                     { "logout", function() awesome.quit() end },
@@ -99,22 +94,21 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "shutdown", shutdown }
                                   }
                         })
-
+-- Launcher containing main menu --
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
+-- Menubar configuration (what is this?)
+menubar.utils.terminal = terminal				-- Set the terminal for applications that require it
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+-------------------------
+-- Wibar Configuration --
+-------------------------
 
--- {{{ Wibar
--- Create a textclock widget
+-- Create a textclock widget --
 mytextclock = wibox.widget.textclock()
 
--- Create a wibox for each screen and add it
+-- Create a wibox for each screen and add it --
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
@@ -153,17 +147,16 @@ local tasklist_buttons = gears.table.join(
                      awful.button({ }, 5, function ()
                                               awful.client.focus.byidx(-1)
                                           end))
-
+-- Set the wallpaper with Nitrogen --
 local function set_wallpaper(s)
     awful.spawn("nitrogen --restore")
 end
 
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+-- Reset wallpaper when a screen's geometry changes (e.g. different resolution) --
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    awful.spawn("nitrogen --restore")
+    set_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
@@ -213,17 +206,20 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 end)
--- }}}
 
--- {{{ Mouse bindings
+--------------------
+-- Mouse Bindings --
+--------------------
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
--- }}}
 
--- {{{ Key bindings
+-----------------
+-- Keybindings --
+-----------------
+
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -306,8 +302,8 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused()awful.spawn("rofi -show drun") end,
+    -- Rofi drun prompt --
+    awful.key({ modkey },            "r",     function () awful.screen.focused()awful.spawn("rofi -show drun -theme ~/.config/rofi/themes/hunter-theme.rasi") end,
               {description = "rofi run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -320,7 +316,7 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
+    -- Menubar --
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
@@ -435,9 +431,10 @@ clientbuttons = gears.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
+-----------
+-- RULES --
+-----------
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -486,16 +483,17 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
 }
--- }}}
 
--- {{{ Signals
+-------------
+-- SIGNALS --
+-------------
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
@@ -557,4 +555,3 @@ end)
 
 --client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 --client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}

@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "Fira Code 9"
+theme.font          = "Fira Code 10"
 
 theme.bg_normal     = "#141414"
 theme.bg_focus      = "#1E1E1E"
@@ -24,8 +24,8 @@ theme.fg_focus      = "#B2B4B5"
 theme.fg_urgent     = "#B2B4B5"
 theme.fg_minimize   = "#B2B4B5"
 
-theme.useless_gap   = dpi(2)
-theme.border_width  = dpi(3)
+theme.useless_gap   = dpi(0)
+theme.border_width  = dpi(2)
 theme.border_normal = "#1E1E1E"
 theme.border_focus  = "#262626"
 theme.border_marked = "#141414"

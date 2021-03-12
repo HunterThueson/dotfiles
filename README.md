@@ -1,34 +1,33 @@
-# dotfiles
+# Dotfiles
+###### Hunter Thueson
+## Installation
+1. Clone the repository into your home directory:
+    $ cd
+    $ git clone https://github.com/HunterThueson/dotfiles
+2. Make the installation script executable *NOTE: This file doesn't exist yet, but it's on the TODO list.* :
+    $ chmod +x ~/.setup
+3. Run the installation script: *again, this doesn't work yet* 
+    $ ./~/.setup
+4. Follow the prompts. The script will take you through every step of the configuration process,
+and will log everything verbosely in $XDG_CACHE_HOME/dotfiles-setup.log (defaults to $HOME/.cache/dotfiles-setup.log).
 
-<h2>TO DO</h2>
-<h3>AwesomeWM</h3>
-[] Fix clock format
-[] Tasklist shouldn't span entire bar
-[] Set up a proper applauncher
-[] Figure out the best way to move between monitors with only the keyboard
-[] Spotify should open on workspace 9 automatically
-[] Spotify should open on startup
-[] Replace default icons
-[] Network icon/widget in bar
-[] Battery indicator in bar
-[] Volume indicator in bar
-[] Don't show cursor during "normal" operation (no GUI apps)
-[] Proper tag names
-[] Fix nitrogen on multi[]monitors
-[] Improve color scheme
-[] Set keybind to toggle titlebars
-[] Set keybind to toggle topbar
-[] MPV windows don't size properly
-[] Layout switching is a pain
-[] Fira Code is a great terminal font, but less than stellar in bar/titlebar
-<h3>Terminal</h3>
-[] Configure Starship prompt layout/style
-[x] alias 'cdd' should show home directory contents at top of screen
-[] Switch to fish
-    [] proper starship prompt support
-    [] import bash aliases
-[] Find a good color scheme for general terminal usage
-[] Find a good (matching) color scheme for Vim and/or Doom Emacs
-[] Various improvements to Vim
+If you'd rather run just a portion of the script, it'll accept options on the command line.
+The standard '-h' and '--help' options should give you enough information to get started,
+but if you'd like a more in-depth understanding of the inner workings of the script, feel free
+to check out the man page and/or the wiki here on Github. *again, please note, this script
+doesn't actually exist yet, I'm just planning ahead by writing this, thx bb*
 
-- Good god there's so much to do
+## Disclaimer
+**This repository is nowhere near finished! It's gonna be great when it is,
+but in the meantime, please don't blame me if you clone/copy the code and it
+breaks something. I'm constantly breaking things on my own system at the moment,
+and the contents of the entire repository are subject to change (or removal) at
+any time without notice.**
+
+That being said, if you do happen to find some of this useful, let me know! I'll
+feel all warm and fuzzy inside. If you find a breaking bug, also let me know!
+Maybe I'll fix it at some point. If you know how to fix it, please make a pull
+request! I barely know what I'm doing half the time, and the other half I don't.
+Any help or feedback is much appreciated.
+
+Unless you're a dick about it, then I'll just ignore you, I guess, idk

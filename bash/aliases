@@ -18,8 +18,8 @@ alias lolcat='dotacat'                                          # See above
 
 # Navigation
 alias lt='exa -TL 2'
-alias lsa='exa -xalu --git --time-style long-iso'               # More info about hidden files (and git status)
-alias lsd='exa -xD'                                             # List only directories
+alias lsa='exa -alu --git --time-style long-iso'                # More info about hidden files (and git status)
+alias lsd='exa -D'                                              # List only directories
 
 # Terminal clearing and teleportation
 alias cl='clear; sleep 0.01; ls'                                # Clear the terminal and list directories above prompt
@@ -27,7 +27,7 @@ alias cdd='cd; clear; sleep 0.01; exa -xDG'                     # Teleport to $H
 alias cdc='cd ~/.config; clear; sleep 0.01; git status'         # Teleport to ~/.config
 
 # Quick simple actions
-alias rebash='cdd; sleep 0.01; exec bash;'
+alias rebash='cdd; sleep 0.01; exec bash;'                      # Reload bash, for example when testing configurations
 
 # Since I'll never remember how to do this again:
 alias ssh-agent-cyg='eval `ssh-agent -s`'                       # HINT: It's the tilde quotes for fuck's sake

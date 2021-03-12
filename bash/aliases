@@ -1,26 +1,36 @@
 #!/bin/bash
 
-##################
-## Bash Aliases ##
-##################
+#  ----------------
+# | BASH - Aliases |
+#  ----------------
 
-# Terminal clearing operations #
-alias cl='clear; sleep 0.01; ls'
-alias cdd='cd; cl'
-alias cdc='cd ~/.config; cl'
+# Program startup options
+alias cmatrix='cmatrix -u 5 -C green'                           # Start with a speed of '5' and set the color
+alias cp='cp -i' 					        # Confirm before overwriting something
+alias exa='exa -G --color=always --group-directories-first'     # '-G' means 'grid mode'
 
-# Program startup options #
-alias cmatrix='cmatrix -u 5 -C green'					# Start with a speed of '5' and set the color
-alias cp='cp -i' 							# Confirm before overwriting something
-
-# Drop-in program replacements #
+# Drop-in program replacements
+alias ls='exa'                                                  # Replace ls with 'exa': faster, written in Rust
 alias vi='vim'
 alias visudo='sudo vim'
-alias find='fd'
-alias lolcat='dotacat'
-alias moo='cowsay'
-alias ls='exa'
-alias lsa='exa -a'
+alias find='fd'                                                 # Again... faster, written in Rust
+alias lolcat='dotacat'                                          # See above
+
+# Navigation
+alias lt='exa -TL 2'
+alias lsa='exa -xalu --git --time-style long-iso'               # More info about hidden files (and git status)
+alias lsd='exa -xD'                                             # List only directories
+
+# Terminal clearing and teleportation
+alias cl='clear; sleep 0.01; ls'                                # Clear the terminal and list directories above prompt
+alias cdd='cd; clear; sleep 0.01; exa -xDG'                     # Teleport to $HOME
+alias cdc='cd ~/.config; clear; sleep 0.01; git status'         # Teleport to ~/.config
+
+# Quick simple actions
+alias rebash='cdd; sleep 0.01; exec bash;'
 
 # Since I'll never remember how to do this again:
-alias ssh-agent-cyg='eval `ssh-agent -s`'				# HINT: It's the tilde quotes for fuck's sake
+alias ssh-agent-cyg='eval `ssh-agent -s`'                       # HINT: It's the tilde quotes for fuck's sake
+
+# Correcting improperly assigned configuration paths
+alias nvidia-settings="nvidia-settings --config=~/.config/nvidia-settings.rc"

@@ -6,5 +6,11 @@
 [[ -f ~/.config/bash/rc ]] && . ~/.config/bash/rc
 
 export PATH=$HOME/.cargo/bin:$PATH:$HOME/bin
-
 export GTK_THEME=Adwaita:dark
+
+# XDG Base Directories
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+
+# Making sure configuration files are in the right place (even if not strictly necessary)
+export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship.toml

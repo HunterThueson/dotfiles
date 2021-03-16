@@ -10,7 +10,8 @@ alias cp='cp -i' 					        # Confirm before overwriting something
 alias exa='exa -G --color=always --group-directories-first'     # '-G' means 'grid mode'
 
 # Drop-in program replacements
-alias ls='exa'                                                  # Replace ls with 'exa': faster, written in Rust
+alias ls='exa'                                                  # Replace ls with 'exa': 
+#                                                               # faster, written in Rust
 alias vi='vim'
 alias visudo='sudo vim'
 alias find='fd'                                                 # Again... faster, written in Rust
@@ -28,6 +29,7 @@ alias cdc='cd ~/.config; clear; sleep 0.01; git status'         # Teleport to ~/
 
 # Quick simple actions
 alias rebash='cdd; sleep 0.01; exec bash;'                      # Reload bash, for example when testing configurations
+alias wiki='vi wiki/index.wiki'
 
 # Since I'll never remember how to do this again:
 alias ssh-agent-cyg='eval `ssh-agent -s`'                       # HINT: It's the tilde quotes for fuck's sake

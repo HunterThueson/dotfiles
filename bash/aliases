@@ -26,6 +26,8 @@ alias lsd='exa -D'                                              # List only dire
 alias cl='clear; sleep 0.01; ls'                                # Clear the terminal and list directories above prompt
 alias cdd='cd; clear; sleep 0.01; exa -xDG'                     # Teleport to $HOME
 alias cdc='cd ~/.config; clear; sleep 0.01; git status'         # Teleport to ~/.config
+alias cddots='cd ~/.dotfiles; clear; sleep 0.01; git status'    # Copy of ~/.config I'm working with as an experiment
+alias :q='cd ..'                                                # Helpful for post-vim-session navigation
 
 # Quick simple actions
 alias rebash='cdd; sleep 0.01; exec bash;'                      # Reload bash, for example when testing configurations
